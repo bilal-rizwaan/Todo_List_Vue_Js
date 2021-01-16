@@ -11,10 +11,21 @@
     <div id="app">
         <div class="container">
             <h1>Todo List</h1>
+
+            <div v-if="editodo">
+                <input type="text" v-model="todo">
+                <input type="submit" value="Add" @click="store" class="button button-outline">
+            </div>
+
+            <div v-else="deltodo">
+                <input type="text" v-model="todo">
+                <input type="submit" value="update" @click="udpate" class="button button-outline">
+            </div>
+
             <input type="text" v-model="todo">
             <input type="submit" value="Add" @click="store" class="button button-outline">
             <ol>
-                <li v-for="todo in todos">{{todo}}</li>
+                <li v-for="(todo,index) in todos">{{todo}}</li>
             </ol>
         </div>
     </div>
@@ -27,6 +38,10 @@
             methods:{
                 store(){
                     this.todos.push(this.todo)
+                },
+                editodo(todo,index){
+                    this.todo=todo
+
                 }
             }
 
